@@ -45,7 +45,7 @@ Effect myEffects[] = {
     // WhiteDot,
     // OtleyMakerSpaceLoop,
     // OtleyMakerSpaceLoopWithSparkles,
-    BlinkenLights,
+    // BlinkenLights,
     // BlinkenLightsLoop,
     // Red,
     // HotComet,
@@ -53,7 +53,37 @@ Effect myEffects[] = {
     // ColourSparkles,
     // RainbowLoop,
     // RainbowLoopWithSparkles,
+    Dots,
 };
+
+void Dots()
+{
+  const uint8_t numDots = 10;
+  static uint16_t dotPosition[numDots];
+  static uint16_t dotSpeed[numDots];
+  static CRGB dotColour[numDots];
+  const uint16_t numLeds = NUM_LEDS << 8;
+
+  // initialise random dot positions, speeds and colours
+  if (g_counter == 0)
+  {
+    for (uint8_t i = 0; i < numDots; i++)
+    {
+      dotPosition[i] = (rand() % NUM_LEDS) << 8;
+      dotSpeed[i] = 128 + rand() % 50;
+      dotColour[i] = CHSV(random8(), 255, 255);
+    }
+  }
+
+  fill_solid(leds, NUM_LEDS, CRGB::Black);
+
+  for (uint8_t i = 0; i < numDots; i++)
+  {
+    int l = dotPosition[i] >> 8;
+    leds[l] = dotColour[i];
+    dotPosition[i] = (dotPosition[i] + dotSpeed[i]) % numLeds;
+  }
+}
 
 Effect GetCurrentEffect()
 {
