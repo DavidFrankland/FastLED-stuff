@@ -44,12 +44,12 @@ void loop()
 
 Effect myEffects[] = {
     // TestCard,
-    // WhiteDot,
+    WhiteDot,
     // OtleyMakerSpaceLoop,
     // OtleyMakerSpaceLoopWithSparkles,
-    BlinkenLights,
+    // BlinkenLights,
     // BlinkenLightsLoop,
-    // Red,
+    Red,
     // HotComet,
     // ForestColors,
     // ColourSparkles,
@@ -79,15 +79,8 @@ Effect GetCurrentEffect()
 
 void WhiteDot()
 {
-  static int index = 0;
-  if (g_counter == 0)
-  {
-    index = 0;
-  }
   fill_solid(leds, NUM_LEDS, CRGB::Black);
-  int l = index % NUM_LEDS;
-  leds[l] = CRGB::White;
-  index++;
+  leds[g_counter % NUM_LEDS] = CRGB::White;
 }
 
 void OtleyMakerSpaceLoop()
