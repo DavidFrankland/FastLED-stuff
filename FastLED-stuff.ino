@@ -58,7 +58,7 @@ Effect myEffects[] = {
 
 void Dots()
 {
-  const uint8_t numDots = 10;
+  const uint8_t numDots = 25;
   static uint16_t dotPosition[numDots];
   static uint16_t dotSpeed[numDots];
   static CRGB dotColour[numDots];
@@ -69,9 +69,9 @@ void Dots()
   {
     for (uint8_t i = 0; i < numDots; i++)
     {
-      dotPosition[i] = (i * NUM_LEDS / numDots) << 8;
-      dotSpeed[i] = 80 + rand() % 50;
-      dotColour[i] = CHSV(random8(), 255, 255);
+      dotPosition[i] = (i * NUM_LEDS / numDots) << 8; // space the dots evenly on the strip
+      dotSpeed[i] = 80 + rand() % 50;                 // random speed
+      dotColour[i] = CHSV(random8(), 255, 255);       // random colour
     }
   }
 
