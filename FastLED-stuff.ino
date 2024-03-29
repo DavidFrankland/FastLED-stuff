@@ -69,9 +69,28 @@ void Dots()
   {
     for (uint8_t i = 0; i < numDots; i++)
     {
-      dotPosition[i] = (i * NUM_LEDS / numDots) << 8; // space the dots evenly on the strip
-      dotSpeed[i] = 80 + rand() % 50;                 // random speed
       dotColour[i] = CHSV(random8(), 255, 255);       // random colour
+      dotPosition[i] = (i * NUM_LEDS / numDots) << 8; // space the dots evenly on the strip
+
+      // ensure each dot has a unique speed
+      while (true)
+      {
+        bool found = false;
+        // todo: generate negative speeds
+        uint16_t speed = 80 + rand() % 50;
+        for (uint8_t j = 0; j < i; j++)
+        {
+          if (dotSpeed[j] == speed)
+          {
+            found = true;
+          }
+        }
+        if (!found)
+        {
+          dotSpeed[i] = speed;
+          break;
+        }
+      }
     }
   }
 
