@@ -69,8 +69,8 @@ void Dots()
   {
     for (uint8_t i = 0; i < numDots; i++)
     {
-      dotPosition[i] = (rand() % NUM_LEDS) << 8;
-      dotSpeed[i] = 128 + rand() % 50;
+      dotPosition[i] = (i * NUM_LEDS / numDots) << 8;
+      dotSpeed[i] = 80 + rand() % 50;
       dotColour[i] = CHSV(random8(), 255, 255);
     }
   }
