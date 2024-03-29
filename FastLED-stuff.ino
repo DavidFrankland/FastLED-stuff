@@ -18,6 +18,9 @@ int g_counter = 0; // this is reset to zero when the effect changes, so can be u
 const CRGB OtleyMakerSpaceOrange = 0x803000;
 const CRGB OtleyMakerSpaceBlue = 0x000080;
 
+// the colour of the "BlinkenLights" LEDs
+const CRGB BlinkenLightsColour = CRGB::OrangeRed;
+
 extern CRGBPalette16 myRedWhiteBluePalette;
 extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
@@ -150,7 +153,7 @@ void BlinkenLightsLoop()
       leds[l] = leds[l - 1];
     }
     leds[0] = random8() < probability
-                  ? CRGB::OrangeRed
+                  ? BlinkenLightsColour
                   : CRGB::Black;
   }
 }
@@ -165,7 +168,7 @@ void BlinkenLights()
     for (uint8_t l = 0; l < NUM_LEDS; l++)
     {
       leds[l] = random8() < probability
-                    ? CRGB::OrangeRed
+                    ? BlinkenLightsColour
                     : CRGB::Black;
     }
   }
