@@ -5,8 +5,6 @@ const uint8_t UPDATES_PER_SECOND = 100;
 const uint16_t TIME_PER_EFFECT = 5000;
 
 CRGB leds[NUM_LEDS];
-CRGBPalette16 currentPalette;
-TBlendType currentBlending;
 
 int g_counter = 0; // this is reset to zero when the effect changes, so can be used to reset the effect
 
@@ -44,12 +42,12 @@ void loop()
 
 Effect myEffects[] = {
     // TestCard,
-    WhiteDot,
+    // WhiteDot,
     // OtleyMakerSpaceLoop,
     // OtleyMakerSpaceLoopWithSparkles,
-    // BlinkenLights,
+    BlinkenLights,
     // BlinkenLightsLoop,
-    Red,
+    // Red,
     // HotComet,
     // ForestColors,
     // ColourSparkles,
@@ -93,6 +91,14 @@ void OtleyMakerSpaceLoopWithSparkles()
 {
   OtleyMakerSpaceLoop();
   AddSparkles(5);
+}
+
+CRGBPalette16 OtleyMakerSpacePalette()
+{
+  const CRGB o = OtleyMakerSpaceOrange;
+  const CRGB b = OtleyMakerSpaceBlue;
+  const CRGB _ = CRGB::Black;
+  return CRGBPalette16(o, o, o, _, b, b, b, _, o, o, o, _, b, b, b, _);
 }
 
 void RainbowLoop()
@@ -153,7 +159,7 @@ void BlinkenLightsLoop()
 
 void BlinkenLights()
 {
-  const uint8_t delay = 50;        // delay between changes
+  const uint8_t delay = 100;       // delay between changes
   const uint8_t probability = 100; // 0-255, higher = more lights
 
   if (g_counter % delay == 0)
@@ -200,14 +206,6 @@ void TestCard()
       CRGB::Cyan, CRGB::Cyan,
       CRGB::White, CRGB::White);
   fill_palette_circular(leds, NUM_LEDS, 1, palette, 255, NOBLEND);
-}
-
-CRGBPalette16 OtleyMakerSpacePalette()
-{
-  const CRGB o = OtleyMakerSpaceOrange;
-  const CRGB b = OtleyMakerSpaceBlue;
-  const CRGB _ = CRGB::Black;
-  return CRGBPalette16(o, o, o, _, b, b, b, _, o, o, o, _, b, b, b, _);
 }
 
 // This example shows how to set up a static color palette
