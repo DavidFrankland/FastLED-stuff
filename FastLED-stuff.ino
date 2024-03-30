@@ -88,7 +88,7 @@ void Dots()
   {
     for (uint8_t i = 0; i < numDots; i++)
     {
-      dotColour[i] = random8();                       // random colour (hue)
+      dotColour[i] = (i * 256 / numDots);             // space the colours evenly around the colour wheel
       dotPosition[i] = (i * NUM_LEDS / numDots) << 8; // space the dots evenly on the strip
 
       // ensure each dot has a unique speed
