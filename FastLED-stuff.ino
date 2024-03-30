@@ -53,8 +53,28 @@ Effect myEffects[] = {
     // ColourSparkles,
     // RainbowLoop,
     // RainbowLoopWithSparkles,
-    Dots,
+    // Dots,
+    RandomColoursLoop,
 };
+
+void RandomColoursLoop()
+{
+  static CHSV hsv[NUM_LEDS]; // uses 3 bytes per LED
+
+  if (g_counter == 0)
+  {
+    for (uint8_t i = 0; i < NUM_LEDS; i++)
+    {
+      hsv[i] = CHSV(random8(), 255, 255);
+    }
+  }
+
+  for (uint8_t i = 0; i < NUM_LEDS; i++)
+  {
+    hsv[i].hue++;
+    leds[i] = hsv[i];
+  }
+}
 
 void Dots()
 {
