@@ -53,8 +53,8 @@ Effect myEffects[] = {
     // ColourSparkles,
     // RainbowLoop,
     // RainbowLoopWithSparkles,
-    // Dots,
-    RandomColoursLoop,
+    Dots,
+    // RandomColoursLoop,
 };
 
 void RandomColoursLoop()
@@ -80,7 +80,7 @@ void Dots()
   const uint8_t numDots = 25;
   static uint16_t dotPosition[numDots];
   static uint16_t dotSpeed[numDots];
-  static CRGB dotColour[numDots];
+  static uint8_t dotColour[numDots];
   const uint16_t numLeds = NUM_LEDS << 8;
 
   // initialise random dot positions, speeds and colours
@@ -88,7 +88,7 @@ void Dots()
   {
     for (uint8_t i = 0; i < numDots; i++)
     {
-      dotColour[i] = CHSV(random8(), 255, 255);       // random colour
+      dotColour[i] = random8();                       // random colour (hue)
       dotPosition[i] = (i * NUM_LEDS / numDots) << 8; // space the dots evenly on the strip
 
       // ensure each dot has a unique speed
@@ -118,7 +118,7 @@ void Dots()
   for (uint8_t i = 0; i < numDots; i++)
   {
     int l = dotPosition[i] >> 8;
-    leds[l] = dotColour[i];
+    leds[l] = CHSV(dotColour[i], 255, 255);
     dotPosition[i] = (dotPosition[i] + dotSpeed[i]) % numLeds;
   }
 }
