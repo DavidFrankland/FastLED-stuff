@@ -59,20 +59,19 @@ Effect myEffects[] = {
 
 void RandomColoursLoop()
 {
-  static CHSV hsv[NUM_LEDS]; // uses 3 bytes per LED
+  static uint8_t hue[NUM_LEDS];
 
   if (g_counter == 0)
   {
     for (uint8_t i = 0; i < NUM_LEDS; i++)
     {
-      hsv[i] = CHSV(random8(), 255, 255);
+      hue[i] = random8();
     }
   }
 
   for (uint8_t i = 0; i < NUM_LEDS; i++)
   {
-    hsv[i].hue++;
-    leds[i] = hsv[i];
+    leds[i] = CHSV(hue[i]++, 255, 255);
   }
 }
 
